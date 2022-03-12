@@ -2,6 +2,7 @@ package GUI;
 
 import FileReader.Parser;
 
+import javax.sound.sampled.Line;
 import javax.swing.*;
 import javax.swing.border.LineBorder;
 import javax.swing.filechooser.FileNameExtensionFilter;
@@ -10,7 +11,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.File;
 
-public class TextEditor {
+public class TextEditor implements DesignScheme{
 
     private final WindowFrame gui;
     private final Parser parser = new Parser();
@@ -139,26 +140,26 @@ public class TextEditor {
     }
 
     JPanel borderLayout(){
+
         JPanel backing = new JPanel(new BorderLayout());
+
         JPanel center = new JPanel();
-        JPanel west = new JPanel();
-        JPanel east = new JPanel();
-        JPanel north = new JPanel();
-        JPanel south = new JPanel();
-
         backing.add(center, BorderLayout.CENTER);
-        backing.add(west, BorderLayout.WEST);
-        backing.add(east, BorderLayout.EAST);
-        backing.add(north, BorderLayout.NORTH);
-        backing.add(south, BorderLayout.SOUTH);
-
         center.setBorder(new LineBorder(Color.BLACK));
-        west.setBorder(new LineBorder(Color.BLACK));
-        east.setBorder(new LineBorder(Color.BLACK));
-        north.setBorder(new LineBorder(Color.BLACK));
-        south.setBorder(new LineBorder(Color.BLACK));
+
+        borderPanelSetting(backing, BorderLayout.WEST);
+        borderPanelSetting(backing, BorderLayout.EAST);
+        borderPanelSetting(backing, BorderLayout.NORTH);
+        borderPanelSetting(backing, BorderLayout.SOUTH);
 
         return backing;
+    }
+
+    private void borderPanelSetting(JPanel backing, String layout){
+        JPanel panel = new JPanel();
+        panel.setBackground(dark_gray);
+        //panel.setBorder(new LineBorder(Color.BLACK));
+        backing.add(panel, layout);
     }
 
 
